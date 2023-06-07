@@ -6,12 +6,25 @@ const bodyParser = require('body-parser');
 
 require('./db');
 require('./model/User');
+require('./model/LearningContent');
+require('./model/Journal');
+require('./model/UserBiasProfile');
+require('./model/Quiz');
 
 const authRoutes = require('./routes/authRoutes');
-const requiredToken = require('./middleware/AuthTokenRequired')
+const contentRoutes = require('./routes/contentRoutes');
+const journalRoutes = require('./routes/journalRoutes');
+const userBiasProfileRoutes = require('./routes/userBiasProfileRoutes');
+const quizRoutes = require('./routes/quizRoutes');
+const requiredToken = require('./middleware/AuthTokenRequired');
+
 
 app.use(bodyParser.json());
 app.use(authRoutes);
+app.use(contentRoutes);
+app.use(journalRoutes);
+app.use(userBiasProfileRoutes);
+app.use(quizRoutes);
 
 app.get('/', requiredToken, (req,res)=>{
     console.log(req.user);
